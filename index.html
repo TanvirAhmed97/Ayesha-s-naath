@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spotify Clone</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #1db954, #191414);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 800px;
+      text-align: center;
+      padding: 20px;
+      border-radius: 15px;
+      background: rgba(0, 0, 0, 0.8);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 2rem;
+      animation: slide-in 2s ease-in-out;
+    }
+
+    @keyframes slide-in {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .song-list {
+      list-style: none;
+      margin-top: 20px;
+    }
+
+    .song-list li {
+      background: rgba(255, 255, 255, 0.1);
+      margin: 10px 0;
+      padding: 10px 15px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .song-list li:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.05);
+    }
+
+    .add-song {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .add-song input {
+      width: 70%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+    }
+
+    .add-song button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      background: #1db954;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .add-song button:hover {
+      background: #1aa34a;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Ayesha's naath (valo na lagle thappor khaben!)</h1>
+    <ul class="song-list" id="songList">
+      <!-- Spaces for 20 songs -->
+      <li>1. naath 
+        <audio controls>
+          <source src="C:\Users\TanvirAhmed\Documents\spot\WhatsApp Audio 2025-01-18 at 9.21.34 PM.mpeg" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+      </li>
+      <li>2. naath  
+        <audio controls>
+          <source src="C:\Users\TanvirAhmed\Documents\spot\WhatsApp Audio 2025-01-18 at 9.23.17 PM.mpeg" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+      </li>
+      <!-- <li>3. coming soon</li>
+      <li>4. coming soon</li>
+-->
+    </ul>
+    <div class="add-song">
+      <input type="text" id="songInput" placeholder="Add a new song...">
+      <button onclick="addSong()">Add Song</button>
+    </div>
+  </div>
+
+  <script>
+    const songList = document.getElementById('songList');
+    const maxSongs = 20;
+
+    function addSong() {
+      const songInput = document.getElementById('songInput');
+      const songName = songInput.value.trim();
+
+      if (songName === '') {
+        alert('Please enter a song name.');
+        return;
+      }
+
+      if (songList.children.length >= maxSongs) {
+        alert('Song limit reached!');
+        return;
+      }
+
+      const li = document.createElement('li');
+      li.innerHTML = `<span>${songName}</span><button onclick="removeSong(this)" style="background: none; border: none; color: red; cursor: pointer;">Remove</button>`;
+      songList.appendChild(li);
+
+      songInput.value = '';
+    }
+
+    function removeSong(button) {
+      const li = button.parentElement;
+      songList.removeChild(li);
+    }
+  </script>
+</body>
+</html>
